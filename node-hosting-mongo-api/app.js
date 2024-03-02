@@ -1,5 +1,5 @@
 const express = require('express');
-
+const router = require('./router/router')
 const connectDB = require('./config/databaseConfig');
 
 
@@ -11,6 +11,7 @@ connectDB();
 
 // Middleware
 app.use(express.json());
+app.use(router);
 
 
 
