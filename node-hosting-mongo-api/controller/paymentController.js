@@ -1,6 +1,8 @@
+const { runPublisher } = require("../messaging/publisher");
 const PaymentModel = require("../models/callbackModel");
 const { CallbackEntryResponse } = require("../schemas/CallbackEntryResponse");
 const { ErrorResponse } = require("../schemas/ErrorResponse");
+
 
 //create callback entry
 const createPaymentEntry = (req, res) => {
@@ -34,6 +36,7 @@ const createPaymentEntry = (req, res) => {
         receipt_reference: savedObj.receipt_reference,
       };
       const response = new CallbackEntryResponse(200, "Success", responseVar);
+      runPublisher()
       res.json(response);
     })
     .catch((error) => {
